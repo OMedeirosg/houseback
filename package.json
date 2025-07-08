@@ -1,0 +1,28 @@
+{
+  "name": "houseback",
+  "version": "1.0.0",
+  "description": "my study project",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OMedeirosg/houseback.git"
+  },
+  "keywords": [
+    "promise",
+    "async",
+    "UnhandledPromiseRejectionWarning",
+    "PromiseRejectionHandledWarning"
+  ],
+  "author": "Gabriel Medeiros <gabrielmed00@hotmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OMedeirosg/houseback/issues"
+  },
+  "homepage": "https://github.com/OMedeirosg/houseback#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
