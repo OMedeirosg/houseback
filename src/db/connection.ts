@@ -29,23 +29,6 @@ const db = knex({
 });
 
 
-// função para testar conexão
-export const testDbConnection = async () => {
-    try {
-        await db.raw(`  
-            CREATE TABLE IF NOT EXISTS users (
-            id SERIAL PRIMARY KEY,
-            email VARCHAR(255) NOT NULL UNIQUE,
-            password VARCHAR(255) NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        );`);
-        success("Database connection successful");
-    } catch (err) {
-        error("Database connection failed", err);
-        process.exit(1); // encerra aplicação se falhar
-    }
-};
-
 
 
 
