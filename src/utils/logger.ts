@@ -21,4 +21,9 @@ const warning = (message: string) => {
     log(chalk.bold.yellow(`${getTimestamp()} - ${message}`));
 };
 
-export { error, success, warning };
+
+const info = (message: string)=>{
+    log(chalk.bold.white(`${getTimestamp()} - ${message}`))
+}
+
+export { error, success, warning,info };

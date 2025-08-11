@@ -1,7 +1,7 @@
 import express from 'express';
 import { error, success, warning } from './utils/logger';
 import cors from 'cors';
-import db, { testDbConnection } from './db/connection';
+import { signupHandler } from './routes/auth/signup';
 const app = express();
 const PORT = process.env.PORT || 8080
 
@@ -21,34 +21,7 @@ app.get("/health", (req, res) => {
     res.status(200).json({ message: "Server is healthy" });
 });
 
-app.post("/signup", async (req, res) => {
-    success("Signup endpoint hit");
-
-
-    const { email, password } = req.body;
-
-    warning(`Email:${email}, Password:${password}`);
-    if (!email) {
-        res.status(406).json({ message: "Email is required" });
-    }
-
-    try {
-        db.raw(`
-        INSERT INTO users (email, password) VALUES (?, ?) ON CONFLICT (email) DO NOTHING;
-    `, [email, password]).then((res) => {
-            const result = res[0];
-            success(`User with email ${email} created successfully. Result: ${JSON.stringify(result)}`);
-            warning(`Database operation result: ${JSON.stringify(result)}`);
-        })
-    }
-    catch (err) {
-        error(`Error during signup operation ${err}`);
-        res.status(500).json({ message: "Internal server error" });
-        return;
-    }
-    res.status(200).json({ message: "Signup endpoint is working" });
-
-});
+app.post("/signup", signupHandler);
 
 app.post("/signin", (req, res) => {
 
@@ -68,17 +41,8 @@ app.post("/signin", (req, res) => {
 });
 
 
-
-
-
 (async () => {
-    try {
-        await testDbConnection();
-        success("Database connection tested successfully");
-    } catch (err) {
-        error(`Failed to test database connection ${err}`);
-        process.exit(1); // Exit the process if the database connection fails
-    }
+
 
     app.listen(PORT, () => {
         success(`Server is running on port ${PORT}`);

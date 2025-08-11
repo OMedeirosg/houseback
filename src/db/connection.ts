@@ -1,7 +1,5 @@
 import knex from "knex";
 import dotenv from "dotenv";
-import { success } from "../utils/logger";
-import { error } from "console";
 
 dotenv.config();
 
