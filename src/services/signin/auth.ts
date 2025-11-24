@@ -1,21 +1,20 @@
 
-import { error, info, warning } from "../utils/logger";
-import { hashPassword } from "./utils/hash-password";
-import { uuidv4 } from "zod";
-import db from "../db/connection";
+import { error, info, warning } from "../../utils/logger";
+import { hashPassword } from "../utils/hash-password";
+import db from "../../db/connection";
 import { v4 } from "uuid";
-import { prettify } from "../utils";
+import { prettify } from "../../utils";
 
 
 
 
-interface RegisterServiceResponse {
+export interface RegisterServiceResponse {
     message: string;
     status: number;
-    data: Record<string,any> | null 
+    data: Record<string, any> | null
 }
 
-export const registerService = async (email: string, name: string, password: string) : Promise<RegisterServiceResponse> => {
+export const registerService = async (email: string, name: string, password: string): Promise<RegisterServiceResponse> => {
     const hashedPassword = await hashPassword(password);
     const uuid = v4()
     const payload = {
@@ -27,7 +26,7 @@ export const registerService = async (email: string, name: string, password: str
         updated_at: new Date(),
     }
     try {
-         await db("users").insert(payload);
+        await db("users").insert(payload);
 
         const data = {
             id: uuid,
@@ -43,12 +42,12 @@ export const registerService = async (email: string, name: string, password: str
             message: "Usuário criado com sucesso",
             status: 201,
             data,
-                }
+        }
 
     } catch (err) {
         error(`error ${err}`);
         return {
-            message: "Erro ao criar usuário",
+            message: "Erro ao criar cadastrar usuário no banco de dados",
             status: 500,
             data: null,
         }

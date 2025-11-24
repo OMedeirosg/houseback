@@ -1,7 +1,7 @@
 import express from 'express';
 import { error, success, warning } from './utils/logger';
 import cors from 'cors';
-import { signupHandler } from './routes/auth/signup';
+import { signupHandler } from './routes/auth/signup/signup';
 const app = express();
 const PORT = process.env.PORT || 8080
 
@@ -45,7 +45,7 @@ app.post("/signin", (req, res) => {
 
 
     app.listen(PORT, () => {
-        success(`Server is running on port ${PORT}`);
+        success(`Server is running on port http://localhost:${PORT}`);
     });
 
 }

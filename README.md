@@ -148,9 +148,9 @@ tsconfig.json               # Configuração TypeScript
 
 ### Autenticação e Segurança
 
-- [ ] Hash de senhas (bcrypt)
-- [ ] JWT para autenticação
-- [ ] Validação de dados de entrada
+- [x] Hash de senhas (bcrypt)
+- [x] JWT para autenticação
+- [x] Validação de dados de entrada
 
 ### Core Financeiro
 
